@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+}
+
+.ant-layout-header {
+  color: #fff;
+  font-size: 18px;
+}
+
+.ant-layout-content {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .ant-layout-content {
+    padding: 10px;
+  }
+}

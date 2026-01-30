@@ -1,0 +1,12 @@
+.alert-card {
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+.alert-card-buttons {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
