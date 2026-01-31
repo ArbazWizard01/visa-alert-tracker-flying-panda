@@ -1,0 +1,17 @@
+.alert-filters {
+    padding: 10px;
+  margin-bottom: 20px;
+}
+
+.alert-filters .ant-input-search {
+  width: 220px;
+}
+
+.alert-filters .ant-select {
+  width: 180px;
+}
+
+.pagination-wrapper {
+  margin-top: 30px;
+  text-align: center;
+}

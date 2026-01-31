@@ -1,4 +1,5 @@
 import { Modal, Form, Input, Select, Button, message } from "antd";
+import { useEffect } from "react";
 import '../styles/AlertModal.css';
 
 const { Option } = Select;
@@ -6,18 +7,23 @@ const { Option } = Select;
 const AlertModal = ({ open, onCancel, onCreate, initialValues }) => {
   const [form] = Form.useForm();
 
-
-  form.setFieldsValue(initialValues || { status: 'Active' });
+  useEffect(() => {
+    if (initialValues) {
+      form.setFieldsValue(initialValues);
+    } else {
+      form.resetFields();
+      form.setFieldsValue({ status: "Active" });
+    }
+  }, [initialValues, form]);
 
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      await onCreate(values); 
-      message.success(initialValues ? "Alert updated successfully" : "Alert created successfully");
+      await onCreate(values);
+      message.success(initialValues ? "Alert updated" : "Alert created");
       form.resetFields();
-    } catch (errorInfo) {
-      console.log("Validation Failed:", errorInfo);
-      message.error("Please fill all required fields correctly");
+    } catch {
+      message.error("Please fill all required fields");
     }
   };
 
@@ -32,40 +38,23 @@ const AlertModal = ({ open, onCancel, onCreate, initialValues }) => {
       footer={null}
     >
       <Form layout="vertical" form={form}>
-        <Form.Item
-          label="Country"
-          name="country"
-          rules={[{ required: true, message: "Country is required" }]}
-        >
+        <Form.Item label="Country" name="country" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label="City"
-          name="city"
-          rules={[{ required: true, message: "City is required" }]}
-        >
+        <Form.Item label="City" name="city" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label="Visa Type"
-          name="visaType"
-          rules={[{ required: true, message: "Visa Type is required" }]}
-        >
-          <Select placeholder="Select visa type">
+        <Form.Item label="Visa Type" name="visaType" rules={[{ required: true }]}>
+          <Select>
             <Option value="Tourist">Tourist</Option>
             <Option value="Business">Business</Option>
             <Option value="Student">Student</Option>
           </Select>
         </Form.Item>
 
-        <Form.Item
-          label="Status"
-          name="status"
-          rules={[{ required: true, message: "Status is required" }]}
-          initialValue="Active"
-        >
+        <Form.Item label="Status" name="status" rules={[{ required: true }]}>
           <Select>
             <Option value="Active">Active</Option>
             <Option value="Booked">Booked</Option>

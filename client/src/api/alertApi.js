@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://visa-alert-tracker-flying-panda.onrender.com"
+  baseURL: "https://visa-alert-tracker-flying-panda.onrender.com",
 });
 
-export const getAlerts = () => API.get("/alerts");
+export const getAlerts = (params = {}) => API.get("/alerts", { params });
 
 export const createAlert = (data) => API.post("/alerts", data);
 

@@ -1,12 +1,11 @@
-
 import { Card, Button, Tag, Space } from "antd";
-import '../styles/AlertCard.css'; 
+import '../styles/AlertCard.css';
 
-const AlertCard = ({ alert, onUpdate, onDelete, onEdit }) => {
+const AlertCard = ({ alert, onUpdate, onDelete, onEdit, loading }) => {
   const statusColor = {
     Active: "green",
     Booked: "blue",
-    Expired: "red"
+    Expired: "red",
   };
 
   return (
@@ -21,15 +20,24 @@ const AlertCard = ({ alert, onUpdate, onDelete, onEdit }) => {
       </Tag>
 
       <Space className="alert-card-buttons">
-        <Button size="small" onClick={() => onUpdate(alert._id)}>
+        <Button
+          size="small"
+          loading={loading}
+          onClick={() => onUpdate(alert._id)}
+        >
           Mark Booked
         </Button>
 
-        <Button type="default" size="small" onClick={() => onEdit(alert)}>
+        <Button size="small" onClick={() => onEdit(alert)}>
           Edit
         </Button>
 
-        <Button danger size="small" onClick={() => onDelete(alert._id)}>
+        <Button
+          danger
+          size="small"
+          loading={loading}
+          onClick={() => onDelete(alert._id)}
+        >
           Delete
         </Button>
       </Space>
